@@ -27,11 +27,11 @@ TODO:链表连接,将链表a和链表b进行连接合并，连接合并后结果链表仍使用原来两个链表的
 */
 Node* Merge(Node* a, Node* b)
 {
-    Node*A, *B, *C,*D;
+    Node*A=NULL, *B=NULL, *C=NULL,*D=NULL;
     A=a;
     B=b;
     C=a;
-    while (A&&B)
+    while (A!=NULL&&B!=NULL)
     {
         if (A->value<=B->value)
         {
