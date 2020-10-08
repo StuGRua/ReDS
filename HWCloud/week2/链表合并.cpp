@@ -27,29 +27,43 @@ TODO:链表连接,将链表a和链表b进行连接合并，连接合并后结果链表仍使用原来两个链表的
 */
 Node* Merge(Node* a, Node* b)
 {
-    Node*A=NULL, *B=NULL, *C=NULL,*D=NULL;
-    A=a;
-    B=b;
-    C=a;
-    while (A!=NULL&&B!=NULL)
+    Node*pA=NULL, *pB=NULL, *pC=NULL,*pD=NULL;
+    pA=a;//A为链表1指针
+    pB=b;//B为链表2指针
+    pC=a;//C为上一轮A的指针
+    while (pA!=NULL&&pB!=NULL)
     {
-        if (A->value<=B->value)
+        if (pA->value<=pB->value)//A入表，不做操作只记录位置
         {
-            C=A;
-            A=A->next;
+            pC=pA;
+            pA=pA->next;
         }
-        else
+        else//B入表
         {
-            D=B->next;
-            B->next=A;
-            C->next=B;
-            C=B;
-            B=D;
+            pD=pB->next;//D指向B下一位
+            pB->next=pA;//B的next指向链表1的指针位置
+            pC->next=pB;//上一轮的链表1指针位置后接上B：C->B->A
+            pC=pB;//CB指针向下迭代
+            pB=pD;
         }
 
     }
+    if (pB==NULL)
+    {
+        while (pA!=NULL)
+        {
+            pC=pA;
+            pA=pA->next;
+        }
 
-    C->next=A?A:B;
+    }else
+    {
+        while (pB!=NULL)
+        {
+            pC->next=pB;
+            pB=pB->next;
+        }
+    }
     return a;
 }
 void print(Node* pNode)
@@ -93,3 +107,4 @@ int main()
     print(head);
     return 0;
 }
+
