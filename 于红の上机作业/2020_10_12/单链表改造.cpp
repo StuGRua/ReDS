@@ -44,9 +44,6 @@ public:
     void reDoList();
 };
 
-/*
-TODO:1.2-a 以表尾添加结点的方式构建链表,输入为0时，链表构建结束。
- */
 template <class T>
 void LinkList<T>::createLink()
 {
@@ -64,8 +61,6 @@ void LinkList<T>::createLink()
         {
             head->data=value;
         }
-        
-        //TODO:构建链表
         LinkNode<T> *temp = new LinkNode<T>(value);
         tail->link = temp;
         temp->link = NULL;
@@ -141,22 +136,22 @@ void LinkList<T>::reList()
 }
 
 template <class T>
-void LinkList<T>::reDoList()
+void LinkList<T>::reDoList()//思路:先把链表拆分成两部分，前一部分直接翻转，然后连接后一部分
 {
     int size=0;
     LinkNode<T> *link1=head->link,*link2=head,*p;
-    for (p=head;p->link!=NULL;p=p->link)
+    for (p=head;p->link!=NULL;p=p->link)//得到大小
     {
         size++;
     }
-    for (int i = 0; i < size/2; i++)
+    for (int i = 0; i < size/2; i++)//指针指向区分点
     {
         link2=link2->link;
     }
-    p->link=NULL;
+    p->link=NULL;//断开链表
     head=link2;
     reList();
-    for (p=head;p->link!=NULL;p=p->link);
+    for (p=head;p->link!=NULL;p=p->link);//指向连接点，连接两个分开的链表
     p->link=link1;
 }
 
