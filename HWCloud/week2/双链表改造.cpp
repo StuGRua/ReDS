@@ -43,7 +43,6 @@ void Change(Node *a)
         i++; /**i值表示当前p指针的指向**/
         if (i % 2 == 0)
         { /**将第偶数个指针移到头指针左边**/
-
             q->before = p;
             p->next = q;
             q = q->before;
@@ -55,6 +54,7 @@ void Change(Node *a)
         else /**不符合条件，p指针往后移**/
             p = p->next;
     }
+    cout<<"p="<<p->value<<" q="<<q->value<<endl;
     p->next = q;
     q->before = p;
 }
