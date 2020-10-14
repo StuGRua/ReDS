@@ -45,15 +45,15 @@ Ticket::~Ticket()
 void Ticket::reverseTicket()
 {
 	string name,flight;
-	cout<<"请输入您的姓名："<<endl;
+	cout<<"Name:"<<endl;
 	cin>>name;
-	cout<<"请输入您要订的航班号："<<endl;
+	cout<<"Flight:"<<endl;
 	cin>>flight;
  
 	if(head==NULL)
 	{
 		head=tail=new Passenger(name,flight);
-		cout<<"订票成功"<<endl;
+		cout<<"Success."<<endl;
 		return;
 	}
 	else
@@ -67,22 +67,22 @@ void Ticket::reverseTicket()
 				p=p->next;
 		}
 		p->next=new Passenger(name,flight,p->next);
-		cout<<"订票成功"<<endl;
+		cout<<"Success."<<endl;
 		return;
 	}
 }
 void Ticket::cancelTicket()
 {
 	string name,flight;
-	cout<<"请输入您的姓名："<<endl;
+	cout<<"Name:"<<endl;
 	cin>>name;
-	cout<<"请输入您要退订的航班："<<endl;
+	cout<<"Flight"<<endl;
 	cin>>flight;
 	Passenger *p=head,*q=head;
 	if((p->name==name)&&(p->flight==flight))
 	{
 		head=head->next;
-		cout<<"退票成功！"<<endl;
+		cout<<"Success."<<endl;
 		delete p;
 		return;
 	}
@@ -93,7 +93,7 @@ void Ticket::cancelTicket()
 		{
 			q->next=p->next;
 			delete p;
-			cout<<"退票成功！"<<endl;
+			cout<<"Success."<<endl;
 			return;
 		}
 		else
@@ -102,26 +102,26 @@ void Ticket::cancelTicket()
 			p=p->next;
 		}
 	}
-	cout<<"系统没有到您的订票信息"<<endl;
+	cout<<"No info."<<endl;
 	return;
 }
 void Ticket::checkTicket()
 {
 	string name;
-	cout<<"输入您要查找的姓名"<<endl;
+	cout<<"Name:"<<endl;
 	cin>>name;
 	Passenger* p=head;
 	while(p!=NULL)
 	{
 		if(p->name==name)
 		{
-			cout<<"乘客姓名："<<p->name<<" 已定航班"<<p->flight<<endl;
+			cout<<"Name:"<<p->name<<" Flight:"<<p->flight<<endl;
 			return;
 		}
 		else
 			p=p->next;
 	}
-	cout<<"没有该乘客的订票信息"<<endl;
+	cout<<"No info."<<endl;
 	return;
 }
 void Ticket::display()
@@ -129,7 +129,7 @@ void Ticket::display()
 	Passenger* p=head;
 	while(p!=NULL)
 	{
-		cout<<"乘客姓名："<<p->name<<" 已定航班："<<p->flight<<endl;
+		cout<<"Name:"<<p->name<<" Flight:"<<p->flight<<endl;
 		p=p->next;
 	}
 }
@@ -139,14 +139,13 @@ int main()
 	while(true)
 	{
 		cout<<"=============================="<<endl;
-		cout<<"欢迎使用DUT飞机订票系统"<<endl;
-		cout<<"1.预订机票"<<endl;
-		cout<<"2.退票"<<endl;
-		cout<<"3.查询某人是否已定某航班"<<endl;
-		cout<<"4.显示乘客航班信息"<<endl;
-		cout<<"5.退出订票系统"<<endl;
+		cout<<"1.Booking the ticket of flight"<<endl;
+		cout<<"2.Cancel the ticket"<<endl;
+		cout<<"3.Search"<<endl;
+		cout<<"4.Display the information"<<endl;
+		cout<<"5.Exit"<<endl;
 		cout<<"=============================="<<endl;
-		cout<<"请输入您的选择："<<endl;
+		cout<<"Enter choice:"<<endl;
 		int option;
 		cin>>option;
 		switch(option)
@@ -166,7 +165,7 @@ int main()
 		case 5:
 			return 0;
 		default:
-			cout<<"选择有误，请再次输入"<<endl;
+			cout<<"Error choice!"<<endl;
 			break;
 		}
 	}

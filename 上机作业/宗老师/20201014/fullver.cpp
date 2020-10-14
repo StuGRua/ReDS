@@ -317,10 +317,10 @@ int menu()
     int option;
     cout << endl;
     cout << "Main Menu" << endl;
-    cout << "1.Booking the ticket of flighting" << endl;
-    cout << "2.Cancel the flighting" << endl;
+    cout << "1.Booking the ticket of flight" << endl;
+    cout << "2.Cancel the ticket" << endl;
     cout << "3.Display the information " << endl;
-    cout << "4.Search" << endl;
+    cout << "4.Search ticket info" << endl;
     cout << "5.Add a Flight" << endl;
     cout << "6.Delete a Flight" << endl;
     cout << "0.Exit" << endl;
