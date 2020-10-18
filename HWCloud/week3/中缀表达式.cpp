@@ -123,7 +123,7 @@ void Calculator::infix_to_suffix()
     char top;
     for (int i = 0; i < infix.size(); i++)
     {
-        cout<<"For: "<<infix[i]<<endl;
+        //cout<<"For: "<<infix[i]<<endl;
         if (isNumber(infix[i]))
         {
             answer += infix[i];
@@ -135,7 +135,7 @@ void Calculator::infix_to_suffix()
             else top='#';
             if (outStack(infix[i]) > inStack(top))
             {
-                cout<<"in:"<<infix[i]<<endl;
+                //cout<<"in:"<<infix[i]<<endl;
                 operate.add(infix[i]);
             } //入栈高优先级的运算符
             else
@@ -144,8 +144,8 @@ void Calculator::infix_to_suffix()
                 {
                     if (top == '(' && infix[i] == ')')
                     {
-                        cout << "()" << endl;
-                        cout<<"jump i="<<infix[i]<<" to "<<infix[i+1]<<endl;
+                        //cout << "()" << endl;
+                        //cout<<"jump i="<<infix[i]<<" to "<<infix[i+1]<<endl;
                         ++i;
                         operate.del();
                         top = operate.returntop();
@@ -153,7 +153,7 @@ void Calculator::infix_to_suffix()
                     } //当左右括号相遇时，做匹配运算
 
                     answer += operate.returntop();
-                    cout<<"out:"<<operate.returntop()<<endl;
+                    //cout<<"out:"<<operate.returntop()<<endl;
                     operate.del();
 
                     top = operate.returntop(); //取栈顶运算符，用于与现在扫描的运算符进行比较
@@ -162,9 +162,12 @@ void Calculator::infix_to_suffix()
             }
         }
     }
-    answer+=operate.returntop();
+    while(!operate.isempty())
+    {
+        answer+=operate.del();
+    }
     postfix=answer;
-    cout << "Answer is:" << answer << endl;
+    //cout << "Answer is:" << answer << endl;
 }
 
 /*
@@ -177,17 +180,29 @@ void Calculator::cal_suffix()
     char *temp= const_cast<char *>(postfix.c_str()) ;
     for (int i = 0; i < postfix.size(); i++)
     {
-        if (isNumber(returnnum(postfix[i],1)))
+        if (isNumber(*(temp+i)))
         {
-            poststack.add(postfix[i]);
+            poststack.add(returnnum(temp+i,1));
         }
-        else if (!isNumber(postfix[i]))
+        else if (!isNumber(*(temp+i)))
         {
-            cal(postfix[i]);
+            //cout<<"In:"<<*(temp+i)<<endl;
+            cal(*(temp+i));
         }
-        
-        
+        else
+        {
+            cout << "重新输入 并检查表达式的合法性" << endl;
+            exit(1);
+        }
     }
+    double tempnum=poststack.del();
+    if (!poststack.isempty())
+    {
+        cout << "重新输入 并检查表达式的合法性" << endl;
+        exit(1);
+    }
+    else poststack.add(tempnum);
+    
     
 }
 
