@@ -174,7 +174,7 @@ TODO: 1.4-d.计算中缀表达式的值，比如：假如中缀表达式为1+(2-
 void Calculator::cal_suffix()
 {
     infix_to_suffix(); //将中缀表达式转换为后缀表达式
-    char *temp=postfix;
+    char *temp= const_cast<char *>(postfix.c_str()) ;
     for (int i = 0; i < postfix.size(); i++)
     {
         if (isNumber(returnnum(postfix[i],1)))
