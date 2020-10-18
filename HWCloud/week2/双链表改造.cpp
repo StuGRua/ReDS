@@ -50,11 +50,13 @@ void Change(Node *a)
             r->next = s; /**将s指针指向的节点与修改后的前一节点相连接**/
             s->before = r;
             r = r->next;
+            //cout<<"p="<<p->value<<" q="<<q->value<<endl;
         }
         else /**不符合条件，p指针往后移**/
             p = p->next;
+        
     }
-    cout<<"p="<<p->value<<" q="<<q->value<<endl;
+    
     p->next = q;
     q->before = p;
 }

@@ -9,34 +9,38 @@ struct Node {
     int value;
     Node* next;
 };
-
-/*
-TODO:链表倒置的算法
- */
-Node* Reverse(Node* first)
-{
-    Node *C_first,*res,*temp;
-    res = new Node(-1);
-    res->next = first;
- 
-    C_first = res->next;       //C_first 始终为第一个结点，不断后移
-    while(C_first->next!=NULL) //temp为待前差的
-        {
-        temp = C_first->next;
-        C_first->next = temp->next;
-        temp->next = res->next;
-        res->next = temp;          
-    }
-    first=res;
-    return first->next;
-}
 void print(Node* node)
 {
     while (NULL != node) {
         cout << node->value << " ";
         node = node->next;
     }
+    cout<<endl;
 }
+/*
+TODO:链表倒置的算法
+ */
+Node* Reverse(Node* first)
+{
+    Node *C_first,*res,*temp;
+    res = new Node(-1);//res->新表
+    res->next = first;//res->link=旧表
+ 
+    C_first = res->next;//C_first=first       //C_first 始终为第一个结点，不断后移
+    while(C_first->next!=NULL) //temp为待前插的
+        {
+        temp = C_first->next;//
+        C_first->next = temp->next;
+        temp->next = res->next;
+        res->next = temp;     
+        //print(first);
+        //cout<<"res:"<<endl;
+        //print(res);     
+    }
+    first=res;
+    return first->next;
+}
+
 int main()
 {
     int iNum;
