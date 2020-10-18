@@ -118,6 +118,8 @@ TODO:1.4-e  将中缀表达式转换为后缀表达,假如中缀表达式为1+(2
 void Calculator::infix_to_suffix()
 {
     string answer = "";
+    infix=format(infix);
+    //cout<<"Format:"<<infix<<endl;
     stack<char> operate;
     stack<char> number;
     char top;

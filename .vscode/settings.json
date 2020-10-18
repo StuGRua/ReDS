@@ -5,6 +5,8 @@
         "*.wxs": "javascript",
         "*.html": "php",
         "ostream": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "sstream": "cpp",
+        "regex": "cpp"
     }
 }
