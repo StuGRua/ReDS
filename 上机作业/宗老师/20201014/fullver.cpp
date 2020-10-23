@@ -53,7 +53,7 @@ bool Person::Check(int *Seat, int Ch)
     }
     return 0;
 }
-Flight *Index(Flight *head, char *Id)
+Flight *Index(Flight *head, char *Id)//指定航班
 {
     Flight *p = head->next;
 
