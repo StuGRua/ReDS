@@ -27,7 +27,7 @@ int NaiveStrMatch(const string& T, const string& P)
 		}
 	}
 	if (p >= plen)
-		return (t - plen);
+		return (t - plen+1);
 	else
 		return -1;
 }
