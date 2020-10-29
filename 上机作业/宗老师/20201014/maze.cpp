@@ -38,6 +38,7 @@ void Path(int x, int y, int m, int n, int maze[M + 2][N + 2]) // x, y为入口坐标;
     while (!st.empty())
     {                   // 当栈不空，一直走下去
         tmp = st.top(); // 取栈顶元素
+        cout << "testout:"<<tmp.x << ", " << tmp.y << ", " << tmp.dir << endl;
         st.pop();       // 退栈
         i = tmp.x;
         j = tmp.y;   // 取得当前位置坐标
@@ -70,13 +71,13 @@ void Path(int x, int y, int m, int n, int maze[M + 2][N + 2]) // x, y为入口坐标;
                 tmp.y = j;
                 tmp.dir = d;  // 记忆已走过的位置和前进的方向
                 st.push(tmp); // 进栈
+                cout << "testin:"<<tmp.x << ", " << tmp.y << ", " << tmp.dir << endl;
                 i = g;
                 j = h;
                 d = 0; // 移动到（g, h）,重复向各个方向试探的过程
             }
             else // 试探下一个方向
                 d++;
-
         } // 次循环，方向变换，4个方向均试探完毕则到栈顶的位置重新开始试探
 
     } //主循环，坐标移动
