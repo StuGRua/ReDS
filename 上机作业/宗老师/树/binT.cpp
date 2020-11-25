@@ -217,7 +217,9 @@ void BinaryTree<T>::PostOrderWithoutRecusion(BinaryTreeNode<T> *root) //非递�
 
 //----------------------------------------
 //创建树
-//思想都相同，都是通过找到当前根结点从而划分中序序列，区别出左子树右子树；在递归方面都是通过递归更新leftchild_in和rightchild_length来实现迭代，同时通过标记结点（就是当前根结点或叶子结点）给目前结点赋值
+//思想都相同，都是通过找到当前根结点从而划分中序序列，区别出左子树右子树；
+//在递归方面都是通过递归更新leftchild_in和rightchild_length来实现迭代，
+//同时通过标记结点（就是当前根结点或叶子结点）给目前结点赋值
 template <class T>
 void BinaryTree<T>::create1(string m, string n)
 {
