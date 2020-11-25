@@ -241,7 +241,7 @@ int main()
 	//R.insertNode(120);
 	//cout << N7.rightChild->element << endl;
 	//ºÏ²¢É¾³ýN2
-	//R.deleteByMerging(&N2);
+	R.deleteByMerging(&N2);
 	//¸´ÖÆÉ¾³ýN2
 	R.deleteByCopying(&N2);
 	system("pause");
