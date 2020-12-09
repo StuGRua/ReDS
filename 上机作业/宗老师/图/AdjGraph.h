@@ -1,20 +1,20 @@
 #pragma once
 template <class EdgeType>
-class AdjGraph :public Graph<EdgeType>//å›¾çš„é‚»æ¥çŸ©é˜µè¡¨ç¤º
+class AdjGraph :public Graph<EdgeType>//Í¼µÄÁÚ½Ó¾ØÕó±íÊ¾
 {
 private:
-	int ** matrix;//é‚»æ¥çŸ©é˜µæŒ‡é’ˆ
+	int ** matrix;//ÁÚ½Ó¾ØÕóÖ¸Õë
 public:
 	
 	AdjGraph(int ver) :Graph<EdgeType>::Graph(ver)
 	{
-		int i, j;//å¾ªç¯è®¡æ•°å™¨
+		int i, j;//Ñ­»·¼ÆÊıÆ÷
 		matrix = (int **)new int *[ver];
 		for (i = 0; i < ver; i++)
 			matrix[i] = new int[ver];
 		for (i = 0; i < ver; i++)
 			for (j = 0; j < ver; j++)
-				matrix[i][j] = 0;//å­˜æƒé‡
+				matrix[i][j] = 0;//´æÈ¨ÖØ
 	}
 	~AdjGraph()
 	{
@@ -22,7 +22,7 @@ public:
 			delete[]matrix[i];
 		delete[]matrix;
 	}
-	Edge<EdgeType> FirstEdge(int onevertex)//è¿”å›ä¸é¡¶ç‚¹ç›¸å…³è”çš„ç¬¬ä¸€æ¡è¾¹
+	Edge<EdgeType> FirstEdge(int onevertex)//·µ»ØÓë¶¥µãÏà¹ØÁªµÄµÚÒ»Ìõ±ß
 	{
 		Edge<EdgeType> tmpEdge;
 		tmpEdge.start = onevertex;
@@ -37,7 +37,7 @@ public:
 		}
 		return tmpEdge;
 	}
-	Edge<EdgeType> NextEdge(Edge<EdgeType> oneEdge)//è¿”å›ä¸oneEdgeæœ‰ç›¸åŒèµ·ç‚¹çš„ä¸‹ä¸€æ¡è¾¹
+	Edge<EdgeType> NextEdge(Edge<EdgeType> oneEdge)//·µ»ØÓëoneEdgeÓĞÏàÍ¬ÆğµãµÄÏÂÒ»Ìõ±ß
 	{
 		Edge<EdgeType> tmpEdge;
 		tmpEdge.start = oneEdge.start;
@@ -52,13 +52,13 @@ public:
 		}
 		return tmpEdge;
 	}
-	void setEdge(int start, int end, EdgeType weight)//ä¸ºå›¾æ–°å¢ä¸€æ¡è¾¹
+	void setEdge(int start, int end, EdgeType weight)//ÎªÍ¼ĞÂÔöÒ»Ìõ±ß
 	{
 		if (matrix[start][end] == 0)
 			this->edgeNum++;
 		matrix[start][end] = weight;
 	}
-	void delEdge(int start, int end)//åˆ é™¤ä¸€æ¡è¾¹
+	void delEdge(int start, int end)//É¾³ıÒ»Ìõ±ß
 	{
 		if (matrix[start][end] != 0)
 			this->edgeNum--;

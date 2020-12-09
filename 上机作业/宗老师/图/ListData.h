@@ -1,30 +1,30 @@
 #pragma once
 template<class EdgeType>
-class listData           				//é‚»æ¥è¡¨è¾¹ç»“ç‚¹çš„æ•°æ®éƒ¨åˆ†å®šä¹‰
+class listData           				//ÁÚ½Ó±í±ß½áµãµÄÊı¾İ²¿·Ö¶¨Òå
 {
 public:
-	int vertex;             			//è¾¹çš„ç»ˆç‚¹
-	EdgeType weight;      			//è¾¹çš„æƒ
+	int vertex;             			//±ßµÄÖÕµã
+	EdgeType weight;      			//±ßµÄÈ¨
 };
-template<class Elem>         		//å®šä¹‰è¾¹ç»“ç‚¹
+template<class Elem>         		//¶¨Òå±ß½áµã
 class ListNode {
 public:
-	Elem element;             		//è¾¹ç»“ç‚¹çš„æ•°æ®
-	ListNode<Elem> *next;     		//è¾¹ç»“ç‚¹æŒ‡é’ˆï¼ŒæŒ‡å‘ä¸‹ä¸€ä¸ªè¾¹ç»“ç‚¹
+	Elem element;             		//±ß½áµãµÄÊı¾İ
+	ListNode<Elem> *next;     		//±ß½áµãÖ¸Õë£¬Ö¸ÏòÏÂÒ»¸ö±ß½áµã
 	ListNode(const Elem& elemval, ListNode<Elem> *nextval = NULL) { element = elemval; next = nextval; }
 	ListNode(ListNode<Elem> *nextval = NULL) { next = nextval; }
 };
 template<class Elem>
-class EdgeList {          			//æ¯ä¸ªé¡¶ç‚¹æ‰€å…³è”çš„è¾¹è¡¨
+class EdgeList {          			//Ã¿¸ö¶¥µãËù¹ØÁªµÄ±ß±í
 public:
-	ListNode<Elem>* head;   		//headæŒ‡é’ˆ
-	EdgeList() {              			//æ„é€ å‡½æ•°
+	ListNode<Elem>* head;   		//headÖ¸Õë
+	EdgeList() {              			//¹¹Ôìº¯Êı
 		head = new ListNode<Elem>();
 	}
-	void removeall()      			//é‡Šæ”¾è¾¹è¡¨æ‰€æœ‰è¾¹ç»“ç‚¹å æ®çš„ç©ºé—´
+	void removeall()      			//ÊÍ·Å±ß±íËùÓĞ±ß½áµãÕ¼¾İµÄ¿Õ¼ä
 	{
 		ListNode<Elem> *tmp;
-		while (head != NULL)    		//é€æ­¥é‡Šæ”¾æ¯ä¸ªè¾¹ç»“ç‚¹å æ®çš„ç©ºé—´
+		while (head != NULL)    		//Öğ²½ÊÍ·ÅÃ¿¸ö±ß½áµãÕ¼¾İµÄ¿Õ¼ä
 		{
 			tmp = head;
 			head = head->next;
@@ -32,30 +32,30 @@ public:
 		}
 	}
 
-	~EdgeList() { removeall(); }	//ææ„å‡½æ•°
+	~EdgeList() { removeall(); }	//Îö¹¹º¯Êı
 };
 template <class EdgeType>
-class ListGraph : public Graph<EdgeType>	//å›¾çš„é‚»æ¥è¡¨è¡¨ç¤º
+class ListGraph : public Graph<EdgeType>	//Í¼µÄÁÚ½Ó±í±íÊ¾
 {
 private:
 	EdgeList<listData<EdgeType>> *graList;
-	//graListæ˜¯ä¿å­˜æ‰€æœ‰è¾¹è¡¨çš„æ•°ç»„
+	//graListÊÇ±£´æËùÓĞ±ß±íµÄÊı×é
 public:
-	ListGraph(int verticesNum) :Graph<EdgeType>::Graph(verticesNum) //æ„é€ å‡½æ•°
-	{//ç”³è¯·ç©ºé—´ï¼Œæœ‰vertexNumä¸ªé¡¶ç‚¹åˆ™æœ‰vertexNumä¸ªè¾¹è¡¨
+	ListGraph(int verticesNum) :Graph<EdgeType>::Graph(verticesNum) //¹¹Ôìº¯Êı
+	{//ÉêÇë¿Õ¼ä£¬ÓĞvertexNum¸ö¶¥µãÔòÓĞvertexNum¸ö±ß±í
 		graList = new EdgeList<listData<EdgeType>>[this->vertexNum];
 	}
-	~ListGraph()           			//ææ„å‡½æ•°
+	~ListGraph()           			//Îö¹¹º¯Êı
 	{
 		delete[] graList;
 	}
-	Edge<EdgeType> FirstEdge(int oneVertex) 	//è¿”å›é¡¶ç‚¹oneVertexçš„ç¬¬ä¸€æ¡è¾¹
+	Edge<EdgeType> FirstEdge(int oneVertex) 	//·µ»Ø¶¥µãoneVertexµÄµÚÒ»Ìõ±ß
 	{
-		Edge<EdgeType> tmpEdge; 	//å°†è¾¹tmpEdgeä½œä¸ºå‡½æ•°çš„è¿”å›å€¼
+		Edge<EdgeType> tmpEdge; 	//½«±ßtmpEdge×÷Îªº¯ÊıµÄ·µ»ØÖµ
 		tmpEdge.start = oneVertex;
-		ListNode<listData<EdgeType>> *temp = graList[oneVertex].head;  			   //graList[oneVertex].headä¿å­˜çš„æ˜¯é¡¶ç‚¹oneVertexçš„è¾¹è¡¨ï¼Œ					   
-		//temp->nextæŒ‡å‘é¡¶ç‚¹oneVertexçš„ç¬¬ä¸€æ¡è¾¹(å¦‚æœtemp->nextä¸ä¸ºnull)
-		if (temp->next != NULL)		//é¡¶ç‚¹oneVertexçš„ç¬¬ä¸€æ¡è¾¹å­˜åœ¨
+		ListNode<listData<EdgeType>> *temp = graList[oneVertex].head;  			   //graList[oneVertex].head±£´æµÄÊÇ¶¥µãoneVertexµÄ±ß±í£¬					   
+		//temp->nextÖ¸Ïò¶¥µãoneVertexµÄµÚÒ»Ìõ±ß(Èç¹ûtemp->next²»Îªnull)
+		if (temp->next != NULL)		//¶¥µãoneVertexµÄµÚÒ»Ìõ±ß´æÔÚ
 		{
 			tmpEdge.end = temp->next->element.vertex;
 			tmpEdge.weight = temp->next->element.weight;
@@ -63,44 +63,44 @@ public:
 		return tmpEdge;
 	}
 	Edge<EdgeType> NextEdge(Edge<EdgeType> oneEdge)
-	{//è¿”å›ä¸è¾¹OneEdgeæœ‰ç›¸åŒå…³è”é¡¶ç‚¹çš„ä¸‹ä¸€æ¡è¾¹
+	{//·µ»ØÓë±ßOneEdgeÓĞÏàÍ¬¹ØÁª¶¥µãµÄÏÂÒ»Ìõ±ß
 		Edge<EdgeType> tmpEdge;
 		tmpEdge.start = oneEdge.start;
 		ListNode<listData<EdgeType>>*temp = graList[oneEdge.start].head;
-		//ç¡®å®šè¾¹oneEdgeåœ¨è¾¹è¡¨ä¸­çš„ä½ç½®,å¦‚æœè¾¹oneEdgeçš„ä¸‹ä¸€æ¡è¾¹ç¡®å®å­˜åœ¨ï¼Œ
-		//åˆ™temp->nextæŒ‡é’ˆæŒ‡å‘ä¸‹ä¸€æ¡è¾¹çš„è¡¨ç›®
+		//È·¶¨±ßoneEdgeÔÚ±ß±íÖĞµÄÎ»ÖÃ,Èç¹û±ßoneEdgeµÄÏÂÒ»Ìõ±ßÈ·Êµ´æÔÚ£¬
+		//Ôòtemp->nextÖ¸ÕëÖ¸ÏòÏÂÒ»Ìõ±ßµÄ±íÄ¿
 		while (temp->next != NULL && temp->next->element.vertex <= oneEdge.end)
 			temp = temp->next;
-		if (temp->next != NULL)         //è¾¹oneEdgeçš„ä¸‹ä¸€æ¡è¾¹å­˜åœ¨ 
+		if (temp->next != NULL)         //±ßoneEdgeµÄÏÂÒ»Ìõ±ß´æÔÚ 
 		{
 			tmpEdge.end = temp->next->element.vertex;
 			tmpEdge.weight = temp->next->element.weight;
 		}
 		return tmpEdge;
 	}
-	void setEdge(int start, int end, EdgeType weight)//ä¸ºå›¾è®¾å®šä¸€æ¡è¾¹
+	void setEdge(int start, int end, EdgeType weight)//ÎªÍ¼Éè¶¨Ò»Ìõ±ß
 	{
 		ListNode<listData<EdgeType>> *temp = graList[start].head;
 		while (temp->next != NULL && temp->next->element.vertex < end)
-			//ç¡®å®šè¾¹(start,end)æˆ–<start,end>åœ¨è¾¹è¡¨ä¸­çš„ä½ç½®,å¦‚æœä¸å­˜åœ¨,åˆ™è¾¹				//(start,end)æˆ–<start,end>ä¸ºæ–°åŠ çš„ä¸€æ¡è¾¹
+			//È·¶¨±ß(start,end)»ò<start,end>ÔÚ±ß±íÖĞµÄÎ»ÖÃ,Èç¹û²»´æÔÚ,Ôò±ß				//(start,end)»ò<start,end>ÎªĞÂ¼ÓµÄÒ»Ìõ±ß
 			temp = temp->next;
 		if (temp->next == NULL)
-		{//è¾¹åœ¨è¾¹è¡¨ä¸­ä¸å­˜åœ¨ä¸”åœ¨è¾¹è¡¨ä¸­å…¶åå·²æ— å…¶ä»–è¾¹,
-		 //åˆ™åœ¨è¾¹è¡¨ä¸­åŠ å…¥è¿™æ¡è¾¹
+		{//±ßÔÚ±ß±íÖĞ²»´æÔÚÇÒÔÚ±ß±íÖĞÆäºóÒÑÎŞÆäËû±ß,
+		 //ÔòÔÚ±ß±íÖĞ¼ÓÈëÕâÌõ±ß
 			temp->next = new ListNode<listData<EdgeType>>;
 			temp->next->element.vertex = end;
 			temp->next->element.weight = weight;
 			this->edgeNum++;
 			return;
 		}
-		if (temp->next->element.vertex == end)		//è¾¹åœ¨è¾¹è¡¨ä¸­å·²å­˜åœ¨
+		if (temp->next->element.vertex == end)		//±ßÔÚ±ß±íÖĞÒÑ´æÔÚ
 		{
 			temp->next->element.weight = weight;
 			return;
 		}
 		if (temp->next->element.vertex > end)
-		{//è¾¹åœ¨è¾¹è¡¨ä¸­ä¸å­˜åœ¨,ä½†åœ¨è¾¹è¡¨ä¸­å…¶åå­˜åœ¨å…¶ä»–è¾¹,
-		 //åˆ™åœ¨è¾¹è¡¨ä¸­æ’å…¥è¿™æ¡è¾¹
+		{//±ßÔÚ±ß±íÖĞ²»´æÔÚ,µ«ÔÚ±ß±íÖĞÆäºó´æÔÚÆäËû±ß,
+		 //ÔòÔÚ±ß±íÖĞ²åÈëÕâÌõ±ß
 			ListNode<listData<EdgeType>> *other = temp->next;
 			temp->next = new ListNode<listData<EdgeType>>;
 			temp->next->element.vertex = end;
@@ -110,13 +110,13 @@ public:
 
 		}
 	}
-	void delEdge(int start, int end)         	//åˆ æ‰å›¾çš„ä¸€æ¡è¾¹
+	void delEdge(int start, int end)         	//É¾µôÍ¼µÄÒ»Ìõ±ß
 	{
 		ListNode<listData<EdgeType>> *temp = graList[start].head;
 		while (temp->next != NULL && temp->next->element.vertex < end)
 			temp = temp->next;
-		if (temp->next == NULL) return;        	//è¾¹ä¸å­˜åœ¨,ä¸éœ€ä»»ä½•æ“ä½œ
-		if (temp->next->element.vertex == end)//è¾¹å­˜åœ¨,å°†å…¶åˆ æ‰
+		if (temp->next == NULL) return;        	//±ß²»´æÔÚ,²»ĞèÈÎºÎ²Ù×÷
+		if (temp->next->element.vertex == end)//±ß´æÔÚ,½«ÆäÉ¾µô
 		{
 			ListNode<listData<EdgeType>> *other = temp->next->next;
 			delete temp->next;
@@ -128,25 +128,25 @@ public:
 	{
 		ListNode<listData<EdgeType>>* temp = graList[start].head;
 		while (temp->next != NULL && temp->next->element.vertex < end)
-			//ç¡®å®šè¾¹(start,end)æˆ–<start,end>åœ¨è¾¹è¡¨ä¸­çš„ä½ç½®,å¦‚æœä¸å­˜åœ¨,åˆ™è¾¹				//(start,end)æˆ–<start,end>ä¸ºæ–°åŠ çš„ä¸€æ¡è¾¹
+			//È·¶¨±ß(start,end)»ò<start,end>ÔÚ±ß±íÖĞµÄÎ»ÖÃ,Èç¹û²»´æÔÚ,Ôò±ß				//(start,end)»ò<start,end>ÎªĞÂ¼ÓµÄÒ»Ìõ±ß
 			temp = temp->next;
 		if (temp->next == NULL)
-		{//è¾¹åœ¨è¾¹è¡¨ä¸­ä¸å­˜åœ¨ä¸”åœ¨è¾¹è¡¨ä¸­å…¶åå·²æ— å…¶ä»–è¾¹,
-		 //åˆ™åœ¨è¾¹è¡¨ä¸­åŠ å…¥è¿™æ¡è¾¹
+		{//±ßÔÚ±ß±íÖĞ²»´æÔÚÇÒÔÚ±ß±íÖĞÆäºóÒÑÎŞÆäËû±ß,
+		 //ÔòÔÚ±ß±íÖĞ¼ÓÈëÕâÌõ±ß
 			temp->next = new ListNode<listData<EdgeType>>;
 			temp->next->element.vertex = end;
 			temp->next->element.weight = weight;
 			this->edgeNum++;
 			return;
 		}
-		if (temp->next->element.vertex == end)		//è¾¹åœ¨è¾¹è¡¨ä¸­å·²å­˜åœ¨
+		if (temp->next->element.vertex == end)		//±ßÔÚ±ß±íÖĞÒÑ´æÔÚ
 		{
 			temp->next->element.weight = weight;
 			return;
 		}
 		if (temp->next->element.vertex > end)
-		{//è¾¹åœ¨è¾¹è¡¨ä¸­ä¸å­˜åœ¨,ä½†åœ¨è¾¹è¡¨ä¸­å…¶åå­˜åœ¨å…¶ä»–è¾¹,
-		 //åˆ™åœ¨è¾¹è¡¨ä¸­æ’å…¥è¿™æ¡è¾¹
+		{//±ßÔÚ±ß±íÖĞ²»´æÔÚ,µ«ÔÚ±ß±íÖĞÆäºó´æÔÚÆäËû±ß,
+		 //ÔòÔÚ±ß±íÖĞ²åÈëÕâÌõ±ß
 			ListNode<listData<EdgeType>>* other = temp->next;
 			temp->next = new ListNode<listData<EdgeType>>;
 			temp->next->element.vertex = end;

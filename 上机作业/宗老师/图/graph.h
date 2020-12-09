@@ -8,13 +8,13 @@
 #define UNVISITED 0
 using namespace std;
 template <class EdgeType>
-class Graph //å›¾ç±»å‹
+class Graph //Í¼ÀàĞÍ
 {
 public:
-	int vertexNum;  //å›¾çš„é¡¶ç‚¹æ•°ç›®
-	int edgeNum;	//å›¾çš„è¾¹æ•°ç›®
-	int *Mark;		//æ ‡è®°æŸé¡¶ç‚¹æ˜¯å¦è¢«è®¿é—®è¿‡,è®¿é—®è¿‡ä¸º1ï¼Œæ²¡è®¿é—®ä¸º0
-	bool Cflag; //ç¯æ ‡è®°
+	int vertexNum;  //Í¼µÄ¶¥µãÊıÄ¿
+	int edgeNum;	//Í¼µÄ±ßÊıÄ¿
+	int *Mark;		//±ê¼ÇÄ³¶¥µãÊÇ·ñ±»·ÃÎÊ¹ı,·ÃÎÊ¹ıÎª1£¬Ã»·ÃÎÊÎª0
+	bool Cflag; //»·±ê¼Ç
 	queue<int> Path;
 	Graph(int verticesNum)
 	{
@@ -31,53 +31,53 @@ public:
 	{
 		delete[] Mark;
 	}
-	virtual Edge<EdgeType> FirstEdge(int onevertex) = 0;		 //è¿”å›ä¸é¡¶ç‚¹ç›¸å…³è”çš„ç¬¬ä¸€æ¡è¾¹
-	virtual Edge<EdgeType> NextEdge(Edge<EdgeType> oneEdge) = 0; //è¿”å›ä¸oneedgeæœ‰ç›¸åŒèµ·ç‚¹çš„ä¸‹ä¸€æ¡è¾¹
-	int VerticesNum()											 //è¿”å›å›¾çš„é¡¶ç‚¹ä¸ªæ•°
+	virtual Edge<EdgeType> FirstEdge(int onevertex) = 0;		 //·µ»ØÓë¶¥µãÏà¹ØÁªµÄµÚÒ»Ìõ±ß
+	virtual Edge<EdgeType> NextEdge(Edge<EdgeType> oneEdge) = 0; //·µ»ØÓëoneedgeÓĞÏàÍ¬ÆğµãµÄÏÂÒ»Ìõ±ß
+	int VerticesNum()											 //·µ»ØÍ¼µÄ¶¥µã¸öÊı
 	{
 		return vertexNum;
 	}
-	int edgesnum() //è¿”å›è¾¹ä¸ªæ•°
+	int edgesnum() //·µ»Ø±ß¸öÊı
 	{
 		return edgeNum;
 	}
-	bool Isedge(Edge<EdgeType> oneEdge) //åˆ¤æ–­æ˜¯å¦ä¸ºè¾¹
+	bool Isedge(Edge<EdgeType> oneEdge) //ÅĞ¶ÏÊÇ·ñÎª±ß
 	{
 		if (oneEdge.weight > 0 && oneEdge.weight < INFINITY && oneEdge.end >= 0)
 			return true;
 		else
 			return false;
 	}
-	int StartVertex(Edge<EdgeType> oneEdge) //è¿”å›è¾¹çš„å§‹ç‚¹
+	int StartVertex(Edge<EdgeType> oneEdge) //·µ»Ø±ßµÄÊ¼µã
 	{
 		return oneEdge.start;
 	}
-	int EndVertex(Edge<EdgeType> oneEdge) //è¿”å›è¾¹çš„ç»ˆç‚¹
+	int EndVertex(Edge<EdgeType> oneEdge) //·µ»Ø±ßµÄÖÕµã
 	{
 		return oneEdge.end;
 	}
-	EdgeType Weight(Edge<EdgeType> oneEdge) //è¿”å›è¾¹çš„æƒé‡
+	EdgeType Weight(Edge<EdgeType> oneEdge) //·µ»Ø±ßµÄÈ¨ÖØ
 	{
 		return oneEdge.weight;
 	}
-	virtual void setEdge(int start, int end, EdgeType weight) = 0; //è®¾ç½®è¾¹
-	virtual void delEdge(int start, int end) = 0;				   //åˆ é™¤è¾¹
+	virtual void setEdge(int start, int end, EdgeType weight) = 0; //ÉèÖÃ±ß
+	virtual void delEdge(int start, int end) = 0;				   //É¾³ı±ß
 	virtual void editEdge(int start, int end,EdgeType weight) = 0;
-	void visit(int v)											   //è®¿é—®ç»“ç‚¹
+	void visit(int v)											   //·ÃÎÊ½áµã
 	{
 		cout << v << ' ';
 	}
-	void DFS(int v) //ä»æŸé¡¶ç‚¹å¼€å§‹é€’å½’æ·±åº¦ä¼˜å…ˆæœç´¢
+	void DFS(int v) //´ÓÄ³¶¥µã¿ªÊ¼µİ¹éÉî¶ÈÓÅÏÈËÑË÷
 	{
-		visit(v);//è¾“å‡º
+		visit(v);//Êä³ö
 		Mark[v] = VISITED;
-		for (Edge<EdgeType> e = FirstEdge(v); Isedge(e); e = NextEdge(e))//ä»æœªè®¿é—®ç»“ç‚¹ç»§ç»­è°ƒç”¨æ·±åº¦æœç´¢ï¼Œå¦åˆ™ä¸è°ƒç”¨
+		for (Edge<EdgeType> e = FirstEdge(v); Isedge(e); e = NextEdge(e))//´ÓÎ´·ÃÎÊ½áµã¼ÌĞøµ÷ÓÃÉî¶ÈËÑË÷£¬·ñÔò²»µ÷ÓÃ
 		{
 			if (Mark[EndVertex(e)] == UNVISITED)
 				DFS(EndVertex(e));
 		}
 	}
-	void DFStraverse() //å›¾çš„é€’å½’æ·±åº¦ä¼˜å…ˆæœç´¢
+	void DFStraverse() //Í¼µÄµİ¹éÉî¶ÈÓÅÏÈËÑË÷
 	{
 		int i;
 		for (i = 0; i < VerticesNum(); i++)
@@ -88,24 +88,24 @@ public:
 				DFS(i);
 		}
 	}
-	void DFSNoReverse() //éé€’å½’æ³•æ·±åº¦ä¼˜å…ˆéå†ï¼Œç±»ä¼¼äºŒå‰æ ‘ä¸­åºéå†
+	void DFSNoReverse() //·Çµİ¹é·¨Éî¶ÈÓÅÏÈ±éÀú£¬ÀàËÆ¶ş²æÊ÷ÖĞĞò±éÀú
 	{
-		int i, v, u;//vä¸ºå‡ºå‘ç»“ç‚¹ï¼Œué‚»æ¥ç‚¹
+		int i, v, u;//vÎª³ö·¢½áµã£¬uÁÚ½Óµã
 		stack<int> s;
 		for (i = 0; i < VerticesNum(); i++)
 			Mark[i] = UNVISITED;
 		for (i = 0; i < VerticesNum(); i++)
 		{
-			if (Mark[i] == UNVISITED)//æœªè®¿é—®ç»“ç‚¹è®¿é—®å¹¶å…¥æ ˆ
+			if (Mark[i] == UNVISITED)//Î´·ÃÎÊ½áµã·ÃÎÊ²¢ÈëÕ»
 			{
 				s.push(i);
 				visit(i);
 				Mark[i] = VISITED;
-				while (!s.empty())//ç›´åˆ°æ ˆç©ºä¸ºæ­¢
+				while (!s.empty())//Ö±µ½Õ»¿ÕÎªÖ¹
 				{
 					v = s.top();
 					Edge<EdgeType> e;
-					for (e = FirstEdge(v); Isedge(e); e = NextEdge(e))//æœªè®¿é—®çš„ç‚¹è®¿é—®å¹¶å…¥æ ˆ
+					for (e = FirstEdge(v); Isedge(e); e = NextEdge(e))//Î´·ÃÎÊµÄµã·ÃÎÊ²¢ÈëÕ»
 					{
 						u = EndVertex(e);
 						if (Mark[u] == UNVISITED)
@@ -122,18 +122,18 @@ public:
 			}
 		}
 	}
-	void BFS(int v) //ä»æŸç»“ç‚¹å¼€å§‹å¹¿åº¦ä¼˜å…ˆæœç´¢
+	void BFS(int v) //´ÓÄ³½áµã¿ªÊ¼¹ã¶ÈÓÅÏÈËÑË÷
 	{
 		queue<int> Q;
-		// æ ‡è®°å…¥é˜Ÿ
+		// ±ê¼ÇÈë¶Ó
 		Mark[v] = VISITED;
 		visit(v);
 		Q.push(v);
-		while (!Q.empty())//æ‰§è¡Œåˆ°é˜Ÿä¸­æ— å…ƒç´ 
+		while (!Q.empty())//Ö´ĞĞµ½¶ÓÖĞÎŞÔªËØ
 		{
 			v = Q.front();
 			Q.pop();
-			for (Edge<EdgeType> e = FirstEdge(v); Isedge(e); e = NextEdge(e))//ç›¸é‚»çš„æœªè®¿é—®ç‚¹è®¿é—®å¹¶å…¥é˜Ÿ
+			for (Edge<EdgeType> e = FirstEdge(v); Isedge(e); e = NextEdge(e))//ÏàÁÚµÄÎ´·ÃÎÊµã·ÃÎÊ²¢Èë¶Ó
 			{
 				int u = Mark[EndVertex(e)];
 				int m = EndVertex(e);
@@ -146,24 +146,24 @@ public:
 			}
 		}
 	}
-	void BFStraverse() //å›¾çš„å¹¿åº¦ä¼˜å…ˆæœç´¢
+	void BFStraverse() //Í¼µÄ¹ã¶ÈÓÅÏÈËÑË÷
 	{
 		int v;
 		for (v = 0; v < VerticesNum(); v++)
-			Mark[v] = UNVISITED;//å½’ä½
-		for (v = 0; v < VerticesNum(); v++)//ä»æœªè®¿é—®çš„ç‚¹å¼€å§‹æœç´¢
+			Mark[v] = UNVISITED;//¹éÎ»
+		for (v = 0; v < VerticesNum(); v++)//´ÓÎ´·ÃÎÊµÄµã¿ªÊ¼ËÑË÷
 		{
 			if (Mark[v] == UNVISITED)
 				BFS(v);
 		}
 	}
 
-	void DFSI(int v)//æ·±åº¦æœç´¢æŸ¥æ‰¾ç¯ï¼Œä¸å¸¸è§„DFSä¸åŒçš„æ˜¯Markçš„å–å€¼æœ‰ä¸‰ç§ï¼Œæ–°å¢çš„å€¼2ä»£è¡¨æ­£åœ¨å¤„ç†ä¸­
+	void DFSI(int v)//Éî¶ÈËÑË÷²éÕÒ»·£¬Óë³£¹æDFS²»Í¬µÄÊÇMarkµÄÈ¡ÖµÓĞÈıÖÖ£¬ĞÂÔöµÄÖµ2´ú±íÕıÔÚ´¦ÀíÖĞ
 	{
-		if (Cflag)//Cflagä¸ºæ ‡è®°ç¯ä½
+		if (Cflag)//CflagÎª±ê¼Ç»·Î»
 			return;
 		visit(v);
-		Mark[v] = 2;//æ ‡è®°å¤„ç†ä¸­çš„çŠ¶æ€
+		Mark[v] = 2;//±ê¼Ç´¦ÀíÖĞµÄ×´Ì¬
 		for (Edge<EdgeType> e = FirstEdge(v); Isedge(e); e = NextEdge(e))
 		{
 			if (Mark[EndVertex(e)] == UNVISITED)
@@ -171,17 +171,17 @@ public:
 				
 				DFSI(EndVertex(e));
 			}
-			else if (Mark[EndVertex(e)] == 2)//å¦‚æœè·¯å¾„è¿”å›åˆ°æ­£åœ¨å¤„ç†çš„è·¯å¾„ç‚¹ï¼Œå³ä¸ºæ‰¾åˆ°ç¯ï¼Œæ ‡è®°å¹¶é€€å‡º
+			else if (Mark[EndVertex(e)] == 2)//Èç¹ûÂ·¾¶·µ»Øµ½ÕıÔÚ´¦ÀíµÄÂ·¾¶µã£¬¼´ÎªÕÒµ½»·£¬±ê¼Ç²¢ÍË³ö
 			{
 				Cflag = 1;
 				//cout << "Have cycle!"<<endl;
 				return;
 			}
 		}
-		Mark[v] = VISITED;//é€€å‡ºå¤„ç†çŠ¶æ€ï¼Œæ ‡è®°å·²å¤„ç†çŠ¶æ€
+		Mark[v] = VISITED;//ÍË³ö´¦Àí×´Ì¬£¬±ê¼ÇÒÑ´¦Àí×´Ì¬
 	}
 
-	bool DCycle()//æ˜¾ç¤ºç¯è¾…åŠ©å‡½æ•°
+	bool DCycle()//ÏÔÊ¾»·¸¨Öúº¯Êı
 	{
 		if(Cflag==1) 
 		{

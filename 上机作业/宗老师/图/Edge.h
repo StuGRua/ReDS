@@ -1,6 +1,6 @@
 #pragma once
 template <class EdgeType>
-class Edge//è¾¹ç±»å‹
+class Edge//±ßÀàĞÍ
 {
 public:
 	int start, end;
