@@ -8,7 +8,7 @@ using namespace std;
 int main()
 {
 	cout << "AdjGraph:" << endl;
-	AdjGraph <int> tu(8);     //Í¼µÄÁÚ½Ó¾ØÕóÊµÏÖ
+	AdjGraph <int> tu(8);     //å›¾çš„é‚»æ¥çŸ©é˜µå®ç°
 	tu.setEdge(0,1,1);
 	tu.setEdge(0,2,1);
 	tu.setEdge(1,0,1);
@@ -39,7 +39,7 @@ int main()
 	cout << endl;
 
 	cout << "ListGraph:" << endl;
-	ListGraph <int> tu_2(8);  //Í¼µÄÁÚ½Ó±íÊµÏÖ
+	ListGraph <int> tu_2(8);  //å›¾çš„é‚»æ¥è¡¨å®ç°
 	tu_2.setEdge(0, 1, 1);
 	tu_2.setEdge(0, 2, 1);
 	tu_2.setEdge(1, 0, 1);
