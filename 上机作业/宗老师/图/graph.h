@@ -69,7 +69,7 @@ public:
 	}
 	void DFS(int v) //从某顶点开始递归深度优先搜索
 	{
-		//visit(v);
+		visit(v);//输出
 		Mark[v] = VISITED;
 		for (Edge<EdgeType> e = FirstEdge(v); Isedge(e); e = NextEdge(e))//从未访问结点继续调用深度搜索，否则不调用
 		{

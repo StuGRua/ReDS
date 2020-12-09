@@ -124,4 +124,36 @@ public:
 			this->edgeNum--;
 		}
 	}
+	void editEdge(int start, int end, EdgeType weight)
+	{
+		ListNode<listData<EdgeType>>* temp = graList[start].head;
+		while (temp->next != NULL && temp->next->element.vertex < end)
+			//确定边(start,end)或<start,end>在边表中的位置,如果不存在,则边				//(start,end)或<start,end>为新加的一条边
+			temp = temp->next;
+		if (temp->next == NULL)
+		{//边在边表中不存在且在边表中其后已无其他边,
+		 //则在边表中加入这条边
+			temp->next = new ListNode<listData<EdgeType>>;
+			temp->next->element.vertex = end;
+			temp->next->element.weight = weight;
+			this->edgeNum++;
+			return;
+		}
+		if (temp->next->element.vertex == end)		//边在边表中已存在
+		{
+			temp->next->element.weight = weight;
+			return;
+		}
+		if (temp->next->element.vertex > end)
+		{//边在边表中不存在,但在边表中其后存在其他边,
+		 //则在边表中插入这条边
+			ListNode<listData<EdgeType>>* other = temp->next;
+			temp->next = new ListNode<listData<EdgeType>>;
+			temp->next->element.vertex = end;
+			temp->next->element.weight = weight;
+			temp->next->next = other;
+			this->edgeNum++;
+
+		}
+	}
 };
