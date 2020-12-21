@@ -57,7 +57,7 @@ void putlorinnum(HuffmanTree& hft, int num)
 	{
 		if (hft[hft[i].parent].parent)
 		{
-			hft[i].huffman_code = hft[hft[i].parent].huffman_code + hft[i].huffman_code;
+			hft[i].huffman_code = hft[hft[i].parent].huffman_code + hft[i].huffman_code;//更新哈夫曼编码
 		}
 	}
 }
@@ -97,7 +97,7 @@ void CreateHuffmanTree(HuffmanTree& HT, int num)
 		HT[i].weight = HT[min.s1].weight + HT[min.s2].weight;
 		HT[i].data = -1;
 	}
-	putlorinnum(HT, m);
+	putlorinnum(HT, m);//注意是构建完树才进行编码的生成
 	for (int i = 1; i <= m; i++)  //进行每个字符哈夫曼码的输出
 	{
 		if (HT[i].data != -1)
